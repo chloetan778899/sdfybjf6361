@@ -108,6 +108,49 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
+        document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if(e.key === 'F12') { 
+            e.preventDefault(); 
+            lockSite();
+            return; 
+        }
+
+        if (e.ctrlKey) {
+            if (e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+                e.preventDefault();
+                lockSite();
+                return;
+            }
+            if (e.key === 'u' || e.key === 'U') {
+                e.preventDefault();
+                lockSite();
+                return;
+            }
+        }
+
+        if (e.metaKey) { 
+            if (e.altKey && (e.key === 'i' || e.key === 'j' || e.key === 'u' || e.key === 'c')) {
+                e.preventDefault();
+                lockSite();
+                return;
+            }
+            if (e.key === 'u' || e.key === 'U') {
+                e.preventDefault();
+                lockSite();
+                return;
+            }
+            if (e.key === 'i') {
+                e.preventDefault();
+                lockSite();
+                return;
+            }
+        }
+    });
+
 const initSecurity = () => {
     if (typeof DisableDevtool !== 'undefined') {
         DisableDevtool({
