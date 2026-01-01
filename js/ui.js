@@ -108,15 +108,49 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
+const initSecurity = () => {
     if (typeof DisableDevtool !== 'undefined') {
         DisableDevtool({
             ondevtoolopen: (type) => {
-                lockSite(); 
+                const ua = navigator.userAgent;
+                const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(ua);
+
+                if (isBot) {
+                    const isFakeBot = (
+                        (navigator.plugins && navigator.plugins.length > 0) || 
+                        (window.chrome && window.chrome.runtime) ||           
+                        (navigator.webdriver === false)                       
+                    );
+
+                    if (!isFakeBot) {
+                        return; 
+                    }
+                }
+
+                lockSite();
+                
+                setInterval(() => {
+                    (function() {}.constructor("debugger")());
+                }, 500);
             },
+            clearLog: true,
             disableMenu: true, 
             disableCopy: true, 
-            disableSelect: true
+            disableSelect: true,
+            disableIframeParents: true,
+            interval: 500,
+            detectors: [0, 1, 3, 4, 5, 6, 7]
         });
+    }
+};
+
+if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+        initSecurity();
+    }, { timeout: 2000 });
+} else {
+    initSecurity();
+}
     } else {
         console.warn('DisableDevtool library not loaded. Make sure to include the CDN link in your HTML.');
     }
