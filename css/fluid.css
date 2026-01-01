@@ -1,0 +1,60 @@
+/* css/fluid.css */
+.fluid-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh; 
+    padding: 0;
+    background-color: var(--bg-body); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+.fluid-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: auto;
+}
+
+.fluid-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+    pointer-events: none; 
+}
+
+.fluid-heading {
+    font-family: var(--font-stack);
+    font-size: 2rem; 
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 0 0 16px 0;
+    letter-spacing: -0.02em;
+    transition: color 0.3s ease;
+}
+
+.fluid-subtitle {
+    font-family: var(--font-stack);
+    font-size: 1rem;
+    color: var(--text-sub);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 32px auto; 
+    transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .fluid-section { min-height: 80vh; }
+    .fluid-heading { font-size: 1.75rem; }
+    .fluid-subtitle { font-size: 0.9rem; }
+    .fluid-subtitle-small { font-size: 0.85rem; }
+}
