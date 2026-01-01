@@ -438,6 +438,8 @@ input, textarea {
 }
 img {
     -webkit-user-drag: none;
-    user-drag: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     pointer-events: none;
 }
