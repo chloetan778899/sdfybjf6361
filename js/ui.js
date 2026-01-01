@@ -155,16 +155,16 @@ const initSecurity = () => {
         DisableDevtool({
             ondevtoolopen: (type) => {
                 const ua = navigator.userAgent;
-                const isBot = /bot|googlebot|crawler|spider|robot|crawling/i.test(ua);
+                const isBotUA = /bot|googlebot|crawler|spider|robot|crawling/i.test(ua);
 
-                if (isBot) {
-                    const isFakeBot = (
+                if (isBotUA) {
+                    const hasBrowserFingerprint = (
                         (navigator.plugins && navigator.plugins.length > 0) || 
-                        (window.chrome && window.chrome.runtime) ||           
+                        (window.chrome) ||           
                         (navigator.webdriver === false)                       
                     );
 
-                    if (!isFakeBot) {
+                    if (!hasBrowserFingerprint) {
                         return; 
                     }
                 }
