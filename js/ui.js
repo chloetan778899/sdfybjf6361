@@ -78,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         yearSpan.textContent = new Date().getFullYear();
     }
 
-    // --- YOUR CUSTOM OVERLAY FUNCTION (Kept as requested) ---
     let isLocked = false;
     function lockSite() {
         if (isLocked) return; 
@@ -108,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-        document.addEventListener('contextmenu', (e) => {
+    document.addEventListener('contextmenu', (e) => {
         e.preventDefault();
     });
 
@@ -186,17 +185,6 @@ const initSecurity = () => {
         });
     }
 };
-
-if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => {
-        initSecurity();
-    }, { timeout: 2000 });
-} else {
-    initSecurity();
-}
-    } else {
-        console.warn('DisableDevtool library not loaded. Make sure to include the CDN link in your HTML.');
-    }
 
     const statsSection = document.querySelector('.stats-section');
     const statNumbers = document.querySelectorAll('.stat-number');
