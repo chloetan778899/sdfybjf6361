@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         yearSpan.textContent = new Date().getFullYear();
     }
 
+    // --- YOUR CUSTOM OVERLAY FUNCTION (Kept as requested) ---
     let isLocked = false;
     function lockSite() {
         if (isLocked) return; 
@@ -107,48 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    document.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if(e.key === 'F12') { 
-            e.preventDefault(); 
-            lockSite();
-            return; 
-        }
-
-        if (e.ctrlKey) {
-            if (e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
-                e.preventDefault();
-                lockSite();
-                return;
-            }
-            if (e.key === 'u' || e.key === 'U') {
-                e.preventDefault();
-                lockSite();
-                return;
-            }
-        }
-
-        if (e.metaKey) { 
-            if (e.altKey && (e.key === 'i' || e.key === 'j' || e.key === 'u' || e.key === 'c')) {
-                e.preventDefault();
-                lockSite();
-                return;
-            }
-            if (e.key === 'u' || e.key === 'U') {
-                e.preventDefault();
-                lockSite();
-                return;
-            }
-            if (e.key === 'i') {
-                e.preventDefault();
-                lockSite();
-                return;
-            }
-        }
-    });
+    if (typeof DisableDevtool !== 'undefined') {
+        DisableDevtool({
+            ondevtoolopen: (type) => {
+                lockSite(); 
+            },
+            disableMenu: true, 
+            disableCopy: true, 
+            disableSelect: true
+        });
+    } else {
+        console.warn('DisableDevtool library not loaded. Make sure to include the CDN link in your HTML.');
+    }
 
     const statsSection = document.querySelector('.stats-section');
     const statNumbers = document.querySelectorAll('.stat-number');
