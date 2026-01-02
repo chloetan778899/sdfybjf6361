@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Verdia</title>
+    
+    <link rel="icon" type="image/webp" href="images/favicon.webp">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+
+    <nav class="glass-nav">
+        <a href="index.html" class="nav-logo-container">
+            <img src="images/logodark.svg" alt="Verdia" class="nav-logo-img">
+        </a>
+        <div class="nav-actions">
+            <button id="themeToggle" class="icon-btn" aria-label="Toggle Dark Mode">
+                <span class="material-icons-round">dark_mode</span>
+            </button>
+            <a href="auth.html" class="link-btn">Sign In</a>
+            <a href="auth.html?mode=signup" class="btn-primary-small">Create Account</a>
+        </div>
+    </nav>
+
+    <div class="legal-layout">
+        <aside class="legal-sidebar">
+            <div class="legal-sidebar-inner">
+                <h3>Legal</h3>
+                <nav class="legal-nav">
+                    <a href="#welcome" class="active">Introduction</a>
+                    <a href="#account">Account Terms</a>
+                    <a href="#payment">Payment & Fees</a>
+                    <a href="#cancellation">Cancellation</a>
+                    <a href="#content">Content Ownership</a>
+                    <a href="#liability">Limitation of Liability</a>
+                    <a href="#contact">Contact Us</a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="legal-content">
+            <h1>Terms of Service</h1>
+            <span class="last-updated">Last updated: January 2026</span>
+
+            <section id="welcome" class="legal-section">
+                <h2>1. Introduction</h2>
+                <p>Welcome to Verdia. By accessing or using our website, services, and tools, you agree to be bound by these Terms of Service. If you do not agree to all the terms and conditions, then you may not access the website or use any services.</p>
+                <p>These terms apply to all users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content.</p>
+            </section>
+
+            <section id="account" class="legal-section">
+                <h2>2. Account Terms</h2>
+                <p>To access certain features of the Service, you must register for an account. When you register, you agree to provide accurate, current, and complete information.</p>
+                <ul>
+                    <li>You must be 13 years or older to use this Service.</li>
+                    <li>You are responsible for maintaining the security of your account and password. Verdia cannot and will not be liable for any loss or damage from your failure to comply with this security obligation.</li>
+                    <li>You are responsible for all content posted and activity that occurs under your account.</li>
+                </ul>
+            </section>
+
+            <section id="payment" class="legal-section">
+                <h2>3. Payment and Fees</h2>
+                <p>A valid credit card is required for paying accounts. Free accounts are not required to provide a credit card number.</p>
+                <p>The Service is billed in advance on a monthly or annual basis and is non-refundable. There will be no refunds or credits for partial months of service, upgrade/downgrade refunds, or refunds for months unused with an open account.</p>
+            </section>
+
+            <section id="cancellation" class="legal-section">
+                <h2>4. Cancellation and Termination</h2>
+                <p>You are solely responsible for properly canceling your account. An email or phone request to cancel your account is not considered cancellation. You can cancel your account at any time by clicking on the Settings link in the global navigation bar at the top of the screen.</p>
+                <p>All of your Content will be immediately deleted from the Service upon cancellation. This information cannot be recovered once your account is cancelled.</p>
+            </section>
+
+            <section id="content" class="legal-section">
+                <h2>5. Content Ownership</h2>
+                <p>We claim no intellectual property rights over the material you provide to the Service. Your profile and materials uploaded remain yours. However, by setting your pages to be viewed publicly, you agree to allow others to view your Content.</p>
+            </section>
+            
+            <section id="liability" class="legal-section">
+                <h2>6. Limitation of Liability</h2>
+                <p>You expressly understand and agree that Verdia shall not be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data or other intangible losses.</p>
+            </section>
+
+            <section id="contact" class="legal-section">
+                <h2>7. Contact Us</h2>
+                <p>Questions about the Terms of Service should be sent to us at support@verdia.com.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-bottom">
+            <p>&copy; <span id="year">2026</span> Verdia Inc. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/ui.js"></script>
+    <script>
+        // Simple script to highlight active section in sidebar
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.legal-section');
+            const navLinks = document.querySelectorAll('.legal-nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
