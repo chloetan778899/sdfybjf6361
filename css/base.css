@@ -145,10 +145,12 @@ body.dark-mode .glass-nav {
     padding: 8px 0; z-index: 1001; transform: translateY(10px); transition: all 0.2s ease;
 }
 .lang-dropdown:hover .lang-menu { visibility: visible; opacity: 1; transform: translateY(0); }
+
 .lang-menu a {
     color: var(--text-main); 
-    /* FIXED: Increased padding and min-height for touch targets */
-    padding: 0 16px; min-height: 48px; display: flex; align-items: center;
+    padding: 12px 12px; 
+    min-height: 48px; 
+    display: flex; align-items: center;
     text-decoration: none;
     font-size: 0.85rem; font-weight: 500;
 }
@@ -288,6 +290,7 @@ body.dark-mode .glass-nav {
     display: block;
     text-decoration: none;
     transition: color 0.2s;
+    padding: px 0;
 }
 
 .footer-links a:hover {
