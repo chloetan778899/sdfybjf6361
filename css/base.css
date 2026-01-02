@@ -280,7 +280,7 @@ body.dark-mode .glass-nav {
     margin: 0 0 0.5rem 0;
     color: var(--text-main);
     font-size: 0.9rem;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .address-block p, 
