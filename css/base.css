@@ -229,6 +229,7 @@ body.dark-mode .glass-nav {
     gap: 60px;
     margin-bottom: 60px;
     text-align: left;
+    
 }
 
 .footer-top-row {
@@ -242,6 +243,7 @@ body.dark-mode .glass-nav {
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
+    font-size: 0.9rem;
 }
 
 .footer-addresses {
@@ -277,7 +279,7 @@ body.dark-mode .glass-nav {
 .address-block h4 {
     margin: 0 0 0.5rem 0;
     color: var(--text-main);
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
 }
 
@@ -290,7 +292,7 @@ body.dark-mode .glass-nav {
     display: block;
     text-decoration: none;
     transition: color 0.2s;
-    padding: px 0;
+    padding: 0px; 
 }
 
 .footer-links a:hover {
@@ -306,7 +308,7 @@ body.dark-mode .glass-nav {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 20px;
-    font-size: 13px;
+    font-size: 0.8rem;
     color: var(--text-sub);
 }
 
