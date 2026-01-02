@@ -317,7 +317,8 @@ body.dark-mode .wrapper-2 .icon-box { color: var(--accent-green); }
     stroke-width: 1.5;
 }
 
-.code-feature-item h4 {
+/* CHANGED selector from h4 to h3 to match new HTML structure */
+.code-feature-item h3 {
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-primary);
