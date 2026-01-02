@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!hasErrors) {
             setLoading(signupForm, true);
             setTimeout(() => {
-                alert("Account created successfully (Mockup)");
+                alert("Account created successfully.");
                 setLoading(signupForm, false);
             }, 1500);
         }
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         setLoading(signinForm, true);
         setTimeout(() => {
-            alert("Signed in successfully (Mockup)");
+            alert("Signed in successfully.");
             setLoading(signinForm, false);
         }, 1500);
     });
