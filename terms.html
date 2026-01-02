@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - Verdia</title>
+    <title>Legal - Verdia</title>
     
     <link rel="icon" type="image/webp" href="images/favicon.webp">
     
@@ -15,80 +15,144 @@
 <body>
 
     <nav class="glass-nav">
-        <a href="index.html" class="nav-logo-container">
+        <a href="index.html" class="nav-logo-container" aria-label="Verdia Home">
             <img src="images/logodark.svg" alt="Verdia" class="nav-logo-img">
         </a>
-        <div class="nav-actions">
-            <button id="themeToggle" class="icon-btn" aria-label="Toggle Dark Mode">
+
+        <div class="mobile-actions">
+            <button id="themeToggleMobile" class="icon-btn" aria-label="Toggle Dark Mode">
                 <span class="material-icons-round">dark_mode</span>
             </button>
-            <a href="auth.html" class="link-btn">Sign In</a>
-            <a href="auth.html?mode=signup" class="btn-primary-small">Create Account</a>
+
+            <div class="lang-dropdown">
+                <button class="icon-btn" aria-label="Language">
+                    <span class="material-icons-round">language</span>
+                </button>
+                <div class="lang-menu">
+                    <a href="#" role="button" onclick="return false;">English</a>
+                    <a href="#" role="button" onclick="return false;">Español</a>
+                    <a href="#" role="button" onclick="return false;">ไทย</a>
+                    <a href="#" role="button" onclick="return false;">Bahasa Melayu</a>
+                    <a href="#" role="button" onclick="return false;">日本語</a>
+                    <a href="#" role="button" onclick="return false;">한국어</a>
+                    <a href="#" role="button" onclick="return false;">繁體</a>
+                    <a href="#" role="button" onclick="return false;">简体</a>
+                </div>
+            </div>
+
+            <button id="menuToggle" class="icon-btn hamburger" aria-label="Menu">
+                <span class="material-icons-round">menu</span>
+            </button>
+        </div>
+
+        <div id="navMenu" class="nav-menu">
+            <div class="spacer"></div>
+
+            <div class="nav-actions">
+                <button id="themeToggle" class="icon-btn desktop-only" aria-label="Toggle Dark Mode">
+                    <span class="material-icons-round">dark_mode</span>
+                </button>
+                
+                <div class="lang-dropdown desktop-only">
+                    <button class="icon-btn" aria-label="Language">
+                        <span class="material-icons-round">language</span>
+                    </button>
+                    <div class="lang-menu">
+                        <a href="#" role="button" onclick="return false;">English</a>
+                        <a href="#" role="button" onclick="return false;">Español</a>
+                        <a href="#" role="button" onclick="return false;">ไทย</a>
+                        <a href="#" role="button" onclick="return false;">Bahasa Melayu</a>
+                        <a href="#" role="button" onclick="return false;">日本語</a>
+                        <a href="#" role="button" onclick="return false;">한국어</a>
+                        <a href="#" role="button" onclick="return false;">繁體</a>
+                        <a href="#" role="button" onclick="return false;">简体</a>
+                    </div>
+                </div>
+                
+                <a href="auth.html" class="link-btn">Sign In</a>
+                <a href="auth.html?mode=signup" class="btn-primary">Create Account</a>
+            </div>
         </div>
     </nav>
 
     <div class="legal-layout">
         <aside class="legal-sidebar">
             <div class="legal-sidebar-inner">
-                <h3>Legal</h3>
+                <h3>Legal Center</h3>
                 <nav class="legal-nav">
-                    <a href="#welcome" class="active">Introduction</a>
-                    <a href="#account">Account Terms</a>
-                    <a href="#payment">Payment & Fees</a>
-                    <a href="#cancellation">Cancellation</a>
-                    <a href="#content">Content Ownership</a>
-                    <a href="#liability">Limitation of Liability</a>
-                    <a href="#contact">Contact Us</a>
+                    <a href="#terms" class="active">Terms of Service</a>
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#cookies">Cookie Policy</a>
+                    <a href="#registration">Legal & Registration</a>
                 </nav>
             </div>
         </aside>
 
         <main class="legal-content">
-            <h1>Terms of Service</h1>
-            <span class="last-updated">Last updated: January 2026</span>
+            <h1 style="margin-bottom: 40px;">Legal</h1>
 
-            <section id="welcome" class="legal-section">
-                <h2>1. Introduction</h2>
+            <section id="terms" class="legal-section">
+                <h2>Terms of Service</h2>
+                <span class="last-updated">Last updated: January 2026</span>
+                
+                <h3>1. Introduction</h3>
                 <p>Welcome to Verdia. By accessing or using our website, services, and tools, you agree to be bound by these Terms of Service. If you do not agree to all the terms and conditions, then you may not access the website or use any services.</p>
-                <p>These terms apply to all users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content.</p>
-            </section>
-
-            <section id="account" class="legal-section">
-                <h2>2. Account Terms</h2>
+                
+                <h3>2. Account Terms</h3>
                 <p>To access certain features of the Service, you must register for an account. When you register, you agree to provide accurate, current, and complete information.</p>
                 <ul>
                     <li>You must be 13 years or older to use this Service.</li>
-                    <li>You are responsible for maintaining the security of your account and password. Verdia cannot and will not be liable for any loss or damage from your failure to comply with this security obligation.</li>
-                    <li>You are responsible for all content posted and activity that occurs under your account.</li>
+                    <li>You are responsible for maintaining the security of your account and password.</li>
                 </ul>
+
+                <h3>3. Payment and Fees</h3>
+                <p>The Service is billed in advance on a monthly or annual basis and is non-refundable. There will be no refunds or credits for partial months of service.</p>
+
+                <h3>4. Cancellation</h3>
+                <p>You can cancel your account at any time by clicking on the Settings link in the global navigation bar. All of your Content will be immediately deleted from the Service upon cancellation.</p>
             </section>
 
-            <section id="payment" class="legal-section">
-                <h2>3. Payment and Fees</h2>
-                <p>A valid credit card is required for paying accounts. Free accounts are not required to provide a credit card number.</p>
-                <p>The Service is billed in advance on a monthly or annual basis and is non-refundable. There will be no refunds or credits for partial months of service, upgrade/downgrade refunds, or refunds for months unused with an open account.</p>
+            <hr style="border: 0; border-top: 1px solid var(--grid-color); margin: 60px 0;">
+
+            <section id="privacy" class="legal-section">
+                <h2>Privacy Policy</h2>
+                <span class="last-updated">Last updated: January 2026</span>
+                <p>Your privacy is important to us. It is Verdia's policy to respect your privacy regarding any information we may collect from you across our website.</p>
+                
+                <h3>Information We Collect</h3>
+                <p>We only ask for personal information when we truly need it to provide a service to you. We collect it by fair and lawful means, with your knowledge and consent.</p>
+                
+                <h3>Data Retention</h3>
+                <p>We only retain collected information for as long as necessary to provide you with your requested service. What data we store, we’ll protect within commercially acceptable means to prevent loss and theft.</p>
             </section>
 
-            <section id="cancellation" class="legal-section">
-                <h2>4. Cancellation and Termination</h2>
-                <p>You are solely responsible for properly canceling your account. An email or phone request to cancel your account is not considered cancellation. You can cancel your account at any time by clicking on the Settings link in the global navigation bar at the top of the screen.</p>
-                <p>All of your Content will be immediately deleted from the Service upon cancellation. This information cannot be recovered once your account is cancelled.</p>
+            <hr style="border: 0; border-top: 1px solid var(--grid-color); margin: 60px 0;">
+
+            <section id="cookies" class="legal-section">
+                <h2>Cookie Policy</h2>
+                <span class="last-updated">Last updated: January 2026</span>
+                <p>We use cookies to help improve your experience of our website. This cookie policy is part of Verdia's privacy policy, and covers the use of cookies between your device and our site.</p>
+                
+                <h3>What are cookies?</h3>
+                <p>A cookie is a small text file that a website saves on your computer or mobile device when you visit the site. It enables the website to remember your actions and preferences over a period of time.</p>
             </section>
 
-            <section id="content" class="legal-section">
-                <h2>5. Content Ownership</h2>
-                <p>We claim no intellectual property rights over the material you provide to the Service. Your profile and materials uploaded remain yours. However, by setting your pages to be viewed publicly, you agree to allow others to view your Content.</p>
-            </section>
-            
-            <section id="liability" class="legal-section">
-                <h2>6. Limitation of Liability</h2>
-                <p>You expressly understand and agree that Verdia shall not be liable for any direct, indirect, incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data or other intangible losses.</p>
+            <hr style="border: 0; border-top: 1px solid var(--grid-color); margin: 60px 0;">
+
+            <section id="registration" class="legal-section">
+                <h2>Legal and Registration</h2>
+                <p><strong>Verdia Inc.</strong></p>
+                <p>Registered in the United States.</p>
+                <p><strong>Registration Number:</strong> 123456789</p>
+                <p><strong>VAT Number:</strong> US 987 654 321</p>
+                <p><strong>Registered Office:</strong><br>
+                44 Tehama Street<br>
+                San Francisco, CA 94105<br>
+                USA</p>
+                
+                <p style="margin-top: 20px;">Questions about the Legal information should be sent to us at <a href="mailto:legal@verdia.com" style="color: var(--text-main);">legal@verdia.com</a>.</p>
             </section>
 
-            <section id="contact" class="legal-section">
-                <h2>7. Contact Us</h2>
-                <p>Questions about the Terms of Service should be sent to us at support@verdia.com.</p>
-            </section>
         </main>
     </div>
 
