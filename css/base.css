@@ -366,6 +366,7 @@ img { -webkit-user-drag: none; -moz-user-select: none; -ms-user-select: none; us
     transition: all 0.2s ease-out;
     pointer-events: none;
     z-index: 2;
+    transform-origin: left top;
 }
 
 .form-group textarea + label {
