@@ -1,374 +1,481 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+:root {
+    --font-stack: 'Inter', system-ui, -apple-system, sans-serif;
+
+    --bg-body: #ffffff;
+    --text-main: #0d0d0d;
+    --text-sub: #425466;
+
+    --nav-bg: rgba(255, 255, 255, 0.6);
+    --nav-border: rgba(255, 255, 255, 0.6);
     
-    <title>Verdia</title>
-    <meta name="description" content="A next-gen infrastructure dashboard for global teams.">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Verdia">
-    <meta property="og:description" content="Zero-config to deploy. Instantly share your work.">
-    <meta property="og:image" content="https://yourwebsite.com/images/og-image.jpg">
-    <meta property="og:url" content="https://yourwebsite.com">
-
-    <meta name="robots" content="index, follow">
-
-    <link rel="icon" type="image/webp" href="images/favicon.webp">
+    --btn-bg: #0d0d0d;
+    --btn-text: #ffffff;
+    --dropdown-bg: rgba(255, 255, 255, 0.9);
+    --dropdown-hover: #f5f5f5;
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" defer></script>
+    --grid-color: rgba(0, 0, 0, 0.06); 
+}
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round&display=block" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+body.dark-mode {
+    --bg-body: #0d0d0d; 
+    --text-main: #ededed;
+    --text-sub: #a1a1a1;
+    
+    --nav-bg: rgba(20, 20, 20, 0.6);
+    --nav-border: rgba(255, 255, 255, 0.15);
+    
+    --btn-bg: #ededed;
+    --btn-text: #0d0d0d;
+    --dropdown-bg: #1a1a1a;
+    --dropdown-hover: #333333;
 
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/hero.css">
-    <link rel="stylesheet" href="css/typewriter.css">
-    <link rel="stylesheet" href="css/workflow.css">
-    <link rel="stylesheet" href="css/fluid.css">
-</head>
-<body>
+    --grid-color: rgba(255, 255, 255, 0.1); 
+}
 
-    <nav class="glass-nav">
-        <a href="#" class="nav-logo-container" aria-label="Verdia Home">
-            <img src="images/logodark.svg" alt="Verdia" class="nav-logo-img">
-        </a>
+*, *::before, *::after, body, button, input {
+    box-sizing: border-box;
+    font-family: var(--font-stack);
+}
 
-        <div class="mobile-actions">
-            <button id="themeToggleMobile" class="icon-btn" aria-label="Toggle Dark Mode">
-                <span class="material-icons-round">dark_mode</span>
-            </button>
+html { 
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+}
 
-            <div class="lang-dropdown">
-                <button class="icon-btn" aria-label="Language">
-                    <span class="material-icons-round">language</span>
-                </button>
-                <div class="lang-menu">
-                    <a href="#" role="button" onclick="return false;">English</a>
-                    <a href="#" role="button" onclick="return false;">Español</a>
-                    <a href="#" role="button" onclick="return false;">ไทย</a>
-                    <a href="#" role="button" onclick="return false;">Bahasa Melayu</a>
-                    <a href="#" role="button" onclick="return false;">日本語</a>
-                    <a href="#" role="button" onclick="return false;">한국어</a>
-                    <a href="#" role="button" onclick="return false;">繁體</a>
-                    <a href="#" role="button" onclick="return false;">简体</a>
-                </div>
-            </div>
+body {
+    margin: 0; padding: 0;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-            <button id="menuToggle" class="icon-btn hamburger" aria-label="Menu">
-                <span class="material-icons-round">menu</span>
-            </button>
-        </div>
+#globe-canvas-container canvas {
+    touch-action: pan-y; 
+}
 
-        <div id="navMenu" class="nav-menu">
-            <div class="spacer"></div>
+body.dark-mode .team-grid img {
+    filter: invert(1) brightness(2);
+    opacity: 0.8;
+    transition: filter 0.3s ease;
+}
 
-            <div class="nav-actions">
-                <button id="themeToggle" class="icon-btn desktop-only" aria-label="Toggle Dark Mode">
-                    <span class="material-icons-round">dark_mode</span>
-                </button>
-                
-                <div class="lang-dropdown desktop-only">
-                    <button class="icon-btn" aria-label="Language">
-                        <span class="material-icons-round">language</span>
-                    </button>
-                    <div class="lang-menu">
-                        <a href="#" role="button" onclick="return false;">English</a>
-                        <a href="#" role="button" onclick="return false;">Español</a>
-                        <a href="#" role="button" onclick="return false;">ไทย</a>
-                        <a href="#" role="button" onclick="return false;">Bahasa Melayu</a>
-                        <a href="#" role="button" onclick="return false;">日本語</a>
-                        <a href="#" role="button" onclick="return false;">한국어</a>
-                        <a href="#" role="button" onclick="return false;">繁體</a>
-                        <a href="#" role="button" onclick="return false;">简体</a>
-                    </div>
-                </div>
-                
-                <a href="auth.html" class="link-btn">Sign In</a>
-                <a href="auth.html?mode=signup" class="btn-primary">Create Account</a>
-                </div>
-        </div>
-    </nav>
+body.dark-mode .partners-section,
+body.dark-mode .workflow-section {
+    background-color: var(--bg-body) !important;
+}
 
-    <main>
-        <section id="hero" class="hero-section">
-            <div class="bg-grid"></div>
-            <div class="layout-grid">
-                <div class="text-section">
-                    <h1 class="heading-primary">Zero-config<br>to deploy. Instantly share your work.</h1>
-                    <p class="subtext">A mission control for frontend applications with real time infrastructure and traffic insights.</p>
-                </div>
-                <div class="visual-section">
-                    <div id="globe-canvas-container"></div>
-                </div>
-            </div>
-        </section>
+body.dark-mode .typewriter-box { color: var(--text-sub) !important; } 
+body.dark-mode .dynamic-text { color: var(--text-main) !important; }
+body.dark-mode .cursor { color: var(--text-main) !important; }
 
-        <section id="partners" class="partners-section">
-            <div class="typewriter-box">
-                <p>Trusted by the best <span id="typewriter-text" class="dynamic-text">global</span><span class="cursor">|</span> teams.</p>
-            </div>
-            <div class="team-grid">
-                <img src="svg/scale.svg" alt="Scale" loading="lazy">
-                <img src="svg/lichtblick.svg" alt="Lichtblick" loading="lazy">
-                <img src="svg/pinecone.svg" alt="Pinecone" loading="lazy">
-                <img src="svg/softbank.svg" alt="Softbank" loading="lazy">
-                <img src="svg/ewtnnews.svg" alt="EWTN News" loading="lazy">
-                <img src="svg/nationalhealthcare.svg" alt="National Healthcare" loading="lazy">
-                <img src="svg/octopusenergy.svg" alt="Octopus Energy" loading="lazy">
-                <img src="svg/terminalthree.svg" alt="Terminal 3" loading="lazy">
-                <img src="svg/liveblocks.svg" alt="Liveblocks" loading="lazy">
-            </div>
-        </section>
+body.dark-mode .heading-primary { color: var(--text-main) !important; }
+body.dark-mode .subtext { color: var(--text-sub) !important; }
 
-        <section id="workflow" class="workflow-section">
-            <div class="integrator-container">
-                <div class="card-wrapper wrapper-1">
-                    <div class="workflow-card">
-                        <div class="content">
-                            <div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3"></circle></svg></div>
-                            <div class="eyebrow"><span class="dot"></span> Tracking</div>
-                            <h2>Project Control</h2>
-                            <p>Create and manage projects with a streamlined workflow designed for speed.</p>
-                        </div>
-                        <div class="chart-wrapper">
-                            <canvas id="trafficChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-wrapper wrapper-2">
-                    <div class="workflow-card">
-                        <div class="content">
-                             <div class="icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
-                            <div class="eyebrow"><span class="dot"></span> Processing</div>
-                            <h2>Coordinate Strategic</h2>
-                            <p>Real-time synchronization of your records across all global instances.</p>
-                        </div>
-                        <div class="animation-container">
-                            <svg viewBox="0 0 600 300"><defs><linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="transparent" /><stop offset="50%" stop-color="#4ade80" /><stop offset="100%" stop-color="transparent" /></linearGradient></defs><path class="wire" d="M50,150 L200,150 L300,50 L550,50 M200,150 L300,150 L550,150 M200,150 L300,150 L550,150 M200,150 L300,250 L550,250" /><path class="data-stream" d="M50,150 L200,150 L300,50 L550,50 M200,150 L300,150 L550,150 M200,150 L300,250 L550,250" /><circle class="main-node" cx="50" cy="150" r="8" /><text class="label" x="35" y="130">Origin</text><circle class="node" cx="550" cy="50" r="5" /><circle class="node-pulse" cx="550" cy="50" r="5" style="animation-delay: 1.5s;" /><text class="label" x="520" y="35">Singapore</text><circle class="node" cx="550" cy="150" r="5" /><circle class="node-pulse" cx="550" cy="150" r="5" style="animation-delay: 1.4s;" /><text class="label" x="532" y="135">Tokyo</text><circle class="node" cx="550" cy="250" r="5" /><circle class="node-pulse" cx="550" cy="250" r="5" style="animation-delay: 1.6s;" /><text class="label" x="534" y="235">Spain</text></svg>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-wrapper wrapper-3">
-                    <div class="workflow-card">
-                        <div class="content">
-                            <div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 19V9C22 7.89543 21.1046 7 20 7H12.5858L10.5858 5H4C2.89543 5 2 5.89543 2 7V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                            <div class="eyebrow"><span class="dot"></span> Unifying</div>
-                            <h2>A Singular Place</h2>
-                            <p>Consolidate specs, docs, projects, and more in one centralized dashboard.</p>
-                        </div>
-                        <div class="folder-wrapper"><div class="linear-folder"><div class="folder-back"><div class="folder-tab"></div><div class="inner-file"><div class="file-line"></div><div class="file-line short"></div></div></div><div class="folder-front"></div></div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="security" class="security-section">
-            <div class="security-container">
-                <div class="security-header">
-                    <h2>Built-in Security. Included for Everyone.</h2>
-                    <p>Our firewall delivers system-wide protection, safeguarding all users by default.</p>
-                </div>
-                <div class="security-grid">
-                    <div class="security-item">
-                        <div class="security-icon-box">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                            </svg>
-                        </div>
-                        <h3>Firewall</h3>
-                        <p>Resilient protection at the edge</p>
-                    </div>
-                    
-                    <div class="security-item">
-                        <div class="security-icon-box">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="3" y1="9" x2="21" y2="9"></line>
-                                <line x1="9" y1="21" x2="9" y2="9"></line>
-                            </svg>
-                        </div>
-                        <h3>Web application firewall</h3>
-                        <p>Protects application traffic from threats</p>
-                    </div>
-
-                    <div class="security-item">
-                        <div class="security-icon-box">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                            </svg>
-                        </div>
-                        <h3>Workspace security</h3>
-                        <p>Trusted access control for teams</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="code-features" class="code-features-section">
-            <div class="code-heading-container">
-                <h2>We know code.</h2>
-            </div>
-            <div class="code-features-container">
-                <div class="code-feature-grid">
-                    <div class="code-feature-item">
-                        <div class="code-icon-box">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                            </svg>
-                        </div>
-                        <h3>Code Quality</h3>
-                        <p>Verify that all code, whether AI-generated or written by developers meets the highest standards.</p>
-                    </div>
-                    <div class="code-feature-item">
-                        <div class="code-icon-box">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                                <path d="m9 12 2 2 4-4"></path>
-                            </svg>
-                        </div>
-                        <h3>Code Security</h3>
-                        <p>Identify vulnerabilities in your codebase and across open source dependencies.</p>
-                    </div>
-                    <div class="code-feature-item">
-                        <div class="code-icon-box">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                            </svg>
-                        </div>
-                        <h3>Code Remediation</h3>
-                        <p>Resolve issues faster and upgrade legacy code using AI-powered fixes.</p>
-                    </div>
-                    <div class="code-feature-item">
-                        <div class="code-icon-box">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                            </svg>
-                        </div>
-                        <h3>Code Orchestration</h3>
-                        <p>Safeguard your modern SDLC with reliable oversight, policies, and controls.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="stats" class="stats-section">
-            <div class="stats-container">
-                <div class="stat-item">
-                    <h3 class="stat-number pixel-text" data-target="750" data-suffix="B">0</h3>
-                    <p>Lines of code analyzed daily</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number pixel-text" data-target="35" data-suffix="+">0</h3>
-                    <p>Supported programming languages, frameworks, and IaC technologies</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number pixel-text" data-target="1" data-suffix="B">0</h3>
-                    <p>Docker image downloads</p>
-                </div>
-            </div>
-        </section>
-        <section class="fluid-section">
-            <div id="fluid-3d-container" class="fluid-container"></div>
-            <div class="fluid-content">
-                <h2 class="fluid-heading">Self-driving Product Operations</h2>
-                <p class="fluid-subtitle">Automate the overhead. AI-powered features like Intelligence pro-actively suggest and apply the right assignees, teams, labels, and projects based on your team’s historical patterns.</p>
-                <p class="fluid-subtitle">An intelligent approach executes invocations concurrently and keeps them resident in memory. As a result, the total cloud infrastructure required is significantly reduced while workloads remain continuously active.</p>
-            </div>
-        </section>
+.glass-nav {
+    position: fixed;
+    top: 10px;
+    left: 50%; transform: translateX(-50%) translateZ(0);
+    width: 95%; max-width: 1000px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 16px;
+    border-radius: 16px;
+    
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--nav-border);
+    
+    box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.05),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
         
-        <section class="final-cta">
-            <h2>Build something great.</h2>
-        </section>
+    z-index: 1000;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
 
-        <section id="contact" class="contact-section">
-            <div class="contact-container">
-                <h2>Contact Us</h2>
-                <form class="contact-form">
-                    <div class="form-row">
-                        <div class="form-group half">
-                            <input type="text" id="contact-name" class="contact-input" placeholder=" " required>
-                            <label for="contact-name">Name</label>
-                        </div>
-                        <div class="form-group half">
-                            <input type="email" id="contact-email" class="contact-input" placeholder=" " required>
-                            <label for="contact-email">Email</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="contact-subject" class="contact-input" placeholder=" " required>
-                        <label for="contact-subject">Subject</label>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="contact-msg" class="contact-input contact-textarea" rows="5" placeholder=" " required></textarea>
-                        <label for="contact-msg">Message</label>
-                    </div>
-                    <button type="submit" class="btn-primary">Send</button>
-                </form>
-            </div>
-        </section>
-    </main>
+body.dark-mode .glass-nav {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
 
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-top-row">
-                <div class="footer-addresses-container">
-                    <h3 style="width: 100%; margin: 0 0 1rem 0; color: var(--text-main); font-size: 1.3rem; font-weight: 600;">About Us</h3>
-                    <div class="footer-addresses">
-                        <div class="address-block">
-                            <h3>San Francisco</h3>
-                            <p>44 Tehama Street<br>San Francisco, CA 94105<br>USA</p>
-                        </div>
-                        <div class="address-block">
-                            <h3>London</h3>
-                            <p>123 Great Portland St<br>London, W1W 6LE<br>United Kingdom</p>
-                        </div>
-                        <div class="address-block">
-                            <h3>Legal</h3>
-                            <div class="footer-links">
-                                <a href="terms.html#terms">Terms of Service</a>
-                                <a href="terms.html#privacy">Privacy Policy</a>
-                                <a href="terms.html#cookies">Cookie Policy</a>
-                                <a href="terms.html#registration">Legal and Registration</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+.nav-logo-container {
+    display: flex;
+    align-items: center;
+}
 
-            <div class="footer-brand-row">
-                <img src="images/logodark.svg" alt="Verdia" class="footer-logo">
-                <p class="footer-mission-text">
-                    We provide the developer experience and infrastructure to build, scale, and secure a faster, more personalized web. Join us and shape the future of the web.
-                </p>
-            </div>
-        </div>
+.nav-logo-img { height: 28px; width: auto; display: block; }
 
-        <div class="footer-bottom">
-            <p>&copy; <span id="year">2025</span> Cience Inc. All rights reserved.</p>
-            <div class="status-indicator">
-                <span class="status-dot"></span> All systems normal.
-            </div>
-        </div>
-    </footer>
+.icon-btn {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--text-main); display: flex; align-items: center; justify-content: center;
+    min-width: 48px; min-height: 48px; padding: 0;
+    border-radius: 50%; transition: background 0.2s;
+}
+.icon-btn:hover { background: rgba(125, 125, 125, 0.1); }
 
-    <button id="backToTop" aria-label="Back to top">
-        <span class="material-icons-round" style="font-size: 20px;">arrow_upward</span>
-    </button>
+.btn-primary, .btn-primary-small {
+    background-color: var(--btn-bg); color: var(--btn-text);
+    border: none; border-radius: 6px; font-weight: 600; cursor: pointer;
+    transition: opacity 0.2s; white-space: nowrap;
+    display: inline-block;
+    text-decoration: none !important;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.btn-primary:hover, .btn-primary-small:hover { 
+    opacity: 0.9;
+    text-decoration: none !important;
+}
+
+.btn-primary { padding: 8px 14px; font-size: 0.85rem; }
+.btn-primary-small { padding: 6px 12px; font-size: 0.75rem; margin-right: 5px; }
+
+.link-btn {
+    text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 0.9rem; margin: 0 10px;
+    padding: 8px 16px; border-radius: 20px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.link-btn:hover {
+    background-color: rgba(125, 125, 125, 0.1);
+}
+
+.nav-menu { display: flex; align-items: center; flex-grow: 1; justify-content: space-between; margin-left: 20px; }
+.spacer { flex-grow: 1; }
+.nav-actions { display: flex; align-items: center; gap: 8px; }
+.mobile-actions { display: none; } 
+
+.lang-dropdown { position: relative; display: inline-block; }
+.lang-menu {
+    visibility: hidden; opacity: 0; position: absolute;
+    top: 100%; right: 0; background-color: var(--dropdown-bg);
+    min-width: 140px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 8px; border: 1px solid var(--nav-border);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    padding: 8px 0; z-index: 1001; transform: translateY(10px); transition: all 0.2s ease;
+}
+
+@media (hover: hover) {
+    .lang-dropdown:hover .lang-menu { 
+        visibility: visible; 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+.lang-dropdown.open .lang-menu { 
+    visibility: visible; 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+.lang-menu a {
+    color: var(--text-main); 
+    padding: 12px 12px; 
+    min-height: 48px; 
+    display: flex; align-items: center;
+    text-decoration: none;
+    font-size: 0.85rem; font-weight: 500;
+}
+.lang-menu a:hover { background-color: var(--dropdown-hover); }
+
+@media (max-width: 768px) {
+    .glass-nav { padding: 8px 12px; flex-wrap: wrap; gap: 0; }
+    .mobile-actions { display: flex; align-items: center; gap: 4px; }
+    .desktop-only { display: none !important; }
     
-    <div id="security-overlay" class="security-overlay" style="display:none;"></div>
+    .nav-menu {
+        display: none; width: 100%; margin-top: 20px; padding-bottom: 20px;
+        border: none; flex-direction: column; justify-content: flex-start; align-items: center; gap: 0; 
+    }
+    .spacer { display: none; }
+    .nav-menu.open { display: flex; animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    
+    .nav-actions { width: 100%; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+    .link-btn { width: 100%; text-align: center; padding: 12px; background-color: transparent; margin: 0; border: none; border-radius: 6px; color: var(--text-main); }
+    .link-btn:hover { background-color: rgba(125,125,125, 0.05); }
 
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script defer src="js/hero.js"></script>
-    <script defer src="js/typewriter.js"></script>
-    <script defer src="js/workflow.js"></script>
-    <script defer src="js/ui.js"></script>
-    <script defer src="js/fluid.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/disable-devtool"></script>
-</body>
-</html>
+    .nav-actions .btn-primary { width: 100%; margin: 0; padding: 12px; display: block; }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+}
+
+.site-footer {
+    width: 100%;
+    padding: 80px 20px 40px 20px;
+    background: transparent;
+    margin-top: 40px;
+    border-top: none;
+}
+
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 60px;
+    margin-bottom: 60px;
+    text-align: left;
+}
+
+.footer-top-row { width: 100%; display: flex; justify-content: flex-start; }
+.footer-addresses-container { display: flex; flex-direction: column; align-items: flex-start; width: 100%; font-size: 0.9rem; }
+.footer-addresses { display: flex; gap: 4rem; text-align: left; justify-content: flex-start; flex-wrap: wrap; }
+.footer-brand-row { max-width: 600px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+.footer-logo { height: 32px; width: auto; margin-bottom: 20px; transition: filter 0.3s ease; }
+.footer-mission-text { color: var(--text-sub); font-size: 0.9rem; line-height: 1.6; margin: 0; }
+.address-block h4 { margin: 0 0 0.5rem 0; color: var(--text-main); font-size: 0.9rem; font-weight: 400; }
+
+.address-block p, .footer-links a {
+    margin: 0; font-size: 0.9rem; color: var(--text-sub); line-height: 1.5;
+    display: block; text-decoration: none; transition: color 0.2s; padding: 0px; 
+}
+.footer-links a:hover { color: var(--text-main); }
+
+.footer-bottom {
+    max-width: 800px; margin: 0 auto; padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); 
+    display: flex; justify-content: space-between; flex-wrap: wrap;
+    gap: 20px; font-size: 0.8rem; color: var(--text-sub);
+}
+
+.status-indicator { display: flex; align-items: center; gap: 8px; }
+.status-dot { width: 8px; height: 8px; background-color: #16a34a; border-radius: 50%; box-shadow: 0 0 5px #16a34a; }
+
+.final-cta { width: 100%; padding: 60px 20px; text-align: center; background-color: var(--bg-body); }
+.final-cta h2 { font-size: 3rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.03em; margin: 0; }
+
+@media (max-width: 768px) {
+    .footer-addresses { gap: 2rem; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .final-cta h2 { font-size: 2rem; }
+}
+
+#backToTop {
+    position: fixed; left: 20px; bottom: 20px;
+    width: 40px; height: 40px; border-radius: 50%;
+    background-color: var(--text-main); color: var(--bg-body);
+    border: 2px solid var(--text-main); 
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 999;
+}
+#backToTop.visible { opacity: 1; pointer-events: all; }
+#backToTop:hover { transform: scale(1.1); }
+
+.wire { fill: none; stroke: var(--grid-color); stroke-width: 2; opacity: 0.2; }
+body.dark-mode .wire { opacity: 0.1; stroke: #fff; }
+
+.data-stream {
+    fill: none; stroke: url(#gradient); stroke-width: 3; stroke-linecap: round;
+    stroke-dasharray: 20 200; stroke-dashoffset: 0; opacity: 0.4;
+    animation: flow 8s linear infinite; 
+    transition: opacity 0.3s, animation-duration 0.3s;
+}
+.node { fill: var(--text-sub); opacity: 0.2; }
+.node-pulse { fill: #4ade80; opacity: 0; transform-origin: center; transition: opacity 0.3s; }
+.workflow-card:hover .data-stream { opacity: 1; animation-duration: 1.5s; }
+.workflow-card:hover .node-pulse { opacity: 1; animation: pulse-green 1.5s infinite; }
+.workflow-card:hover .node-pulse:nth-of-type(1) { animation-delay: 0s; }
+.workflow-card:hover .node-pulse:nth-of-type(2) { animation-delay: 0.3s; }
+.workflow-card:hover .node-pulse:nth-of-type(3) { animation-delay: 0.6s; }
+
+@keyframes flow { to { stroke-dashoffset: -440; } }
+@keyframes pulse-green {
+    0% { transform: scale(1); opacity: 1; box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+    70% { transform: scale(2.5); opacity: 0; box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+    100% { transform: scale(1); opacity: 0; }
+}
+
+.workflow-card svg { z-index: 10; position: relative; overflow: visible; }
+.workflow-card .animation-container { z-index: 5; position: relative; }
+
+button:focus-visible, a:focus-visible { outline: 2px solid var(--text-main); outline-offset: 4px; border-radius: 4px; }
+body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+input, textarea { -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text; }
+img { -webkit-user-drag: none; -moz-user-select: none; -ms-user-select: none; user-select: none; pointer-events: none; }
+
+.contact-section {
+    width: 100%;
+    padding: 60px 20px;
+    background-color: var(--bg-body);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+}
+.contact-container { width: 100%; max-width: 600px; text-align: left; }
+.contact-container h2 { font-size: 1.3rem; font-weight: 600; color: var(--text-main); margin-bottom: 30px; }
+.contact-form { display: flex; flex-direction: column; margin-bottom: 20px; }
+
+.contact-form .btn-primary { width: 100%; padding: 14px 20px; font-size: 1rem; margin-top: 10px; }
+
+.auth-nav .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+.form-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px; 
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.2);
+    background: transparent;
+    color: var(--text-main);
+    font-size: 1rem;
+    line-height: 1.5;
+    outline: none;
+    transition: border-color 0.2s;
+    z-index: 1;
+}
+
+.form-group input[type="number"] {
+    line-height: 1.5;
+    padding: 14px 16px;
+    appearance: textfield; 
+    -moz-appearance: textfield;
+}
+
+.form-group textarea {
+    resize: none; 
+    min-height: 120px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #635bff;
+    border-width: 2px;
+    padding: 13px 15px;
+}
+
+.form-group label {
+    position: absolute;
+    left: 12px;
+    
+    top: 27px; 
+    
+    transform: translateY(-50%);
+    background-color: var(--bg-body);
+    padding: 0 4px;
+    color: var(--text-sub);
+    font-size: 1rem;
+    font-weight: 400;
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+    z-index: 2;
+    transform-origin: left top;
+}
+
+.form-group textarea + label {
+    top: 27px;
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label {
+    top: 0;
+    transform: translateY(-50%) scale(0.85);
+    color: #635bff; 
+    font-weight: 400;
+}
+
+.form-group input:not(:placeholder-shown):not(:focus) + label,
+.form-group textarea:not(:placeholder-shown):not(:focus) + label {
+    top: 0;
+    transform: translateY(-50%) scale(0.85);
+    color: var(--text-sub); 
+    font-weight: 400;
+}
+
+
+.form-group input.invalid,
+.form-group textarea.invalid {
+    border-color: #d32f2f !important;
+}
+
+.form-group input.invalid + label,
+.form-group textarea.invalid + label,
+.form-group input.invalid:focus + label,
+.form-group textarea.invalid:focus + label,
+.form-group input.invalid:not(:placeholder-shown) + label,
+.form-group textarea.invalid:not(:placeholder-shown) + label {
+    color: #d32f2f !important;
+}
+
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea {
+    border-color: rgba(255,255,255,0.2);
+    color: #ededed;
+}
+
+body.dark-mode .form-group label {
+    color: #ededed; 
+    background-color: var(--bg-body);
+}
+
+body.dark-mode .form-group input:focus,
+body.dark-mode .form-group textarea:focus {
+    border-color: #635bff;
+}
+
+body.dark-mode .form-group input:focus + label,
+body.dark-mode .form-group textarea:focus + label {
+    color: #635bff;
+}
+
+body.dark-mode .form-group input:not(:placeholder-shown):not(:focus) + label,
+body.dark-mode .form-group textarea:not(:placeholder-shown):not(:focus) + label {
+    color: #ededed; 
+}
+
+body.dark-mode .form-group input.invalid,
+body.dark-mode .form-group textarea.invalid {
+    border-color: #d32f2f !important;
+}
+body.dark-mode .form-group input.invalid + label,
+body.dark-mode .form-group textarea.invalid + label {
+    color: #d32f2f !important;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+.form-group.half { flex: 1; }
+
+@media (max-width: 600px) {
+    .form-row { flex-direction: column; gap: 0; }
+}
+
+.legal-layout { display: flex; flex-direction: row; max-width: 1200px; margin: 0 auto; padding: 120px 40px 80px 40px; gap: 60px; position: relative; }
+.legal-sidebar { width: 240px; flex-shrink: 0; }
+.legal-sidebar-inner { position: sticky; top: 100px; }
+.legal-sidebar h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-main); margin-bottom: 20px; font-weight: 700; }
+.legal-nav { display: flex; flex-direction: column; gap: 12px; }
+.legal-nav a { text-decoration: none; color: var(--text-sub); font-size: 0.95rem; font-weight: 500; transition: color 0.2s; padding-left: 10px; border-left: 2px solid transparent; }
+.legal-nav a:hover, .legal-nav a.active { color: var(--text-main); border-left-color: #635bff; }
+.legal-content { flex: 1; max-width: 800px; }
+.legal-content h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main); }
+.legal-content .last-updated { color: var(--text-sub); font-size: 0.9rem; margin-bottom: 40px; display: block; }
+.legal-section { margin-bottom: 50px; scroll-margin-top: 100px; }
+.legal-section h2 { font-size: 1.5rem; font-weight: 700; color: var(--text-main); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--grid-color); }
+.legal-section p { color: var(--text-sub); line-height: 1.7; margin-bottom: 16px; }
+.legal-section ul { color: var(--text-sub); line-height: 1.7; margin-bottom: 16px; padding-left: 20px; }
+.legal-section li { margin-bottom: 8px; }
+
+@media (max-width: 900px) {
+    .legal-layout { flex-direction: column; padding: 100px 20px 60px 20px; }
+    .legal-sidebar { width: 100%; margin-bottom: 40px; border-bottom: 1px solid var(--grid-color); padding-bottom: 20px; }
+    .legal-sidebar-inner { position: static; }
+}
