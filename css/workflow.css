@@ -269,7 +269,7 @@ body.dark-mode .wrapper-2 .icon-box { color: var(--accent-green); }
 }
 
 .code-heading-container h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     color: var(--text-primary);
     margin: 0;
@@ -277,7 +277,7 @@ body.dark-mode .wrapper-2 .icon-box { color: var(--accent-green); }
 }
 
 @media (max-width: 768px) {
-    .code-heading-container h2 { font-size: 2rem; }
+    .code-heading-container h2 { font-size: 1.75rem; }
 }
 
 .code-features-container {
@@ -319,14 +319,14 @@ body.dark-mode .wrapper-2 .icon-box { color: var(--accent-green); }
 
 /* CHANGED selector from h4 to h3 to match new HTML structure */
 .code-feature-item h3 {
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: 600;
     color: var(--text-primary);
     margin: 0 0 10px 0;
 }
 
 .code-feature-item p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-sub);
     line-height: 1.5;
     margin: 0;
